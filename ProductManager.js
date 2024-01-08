@@ -183,7 +183,7 @@ const objeto3 = {
         }
 
 const upd = {
-    id:2,
+    id:1,
     fieldUpdate:'stock',
     newValue:30000
 }
@@ -195,7 +195,7 @@ const manager = new ProductManager('./productos')
 // console.log(manager.getProducts()) 
 
 
- console.log(manager.deleteProducts(2))
+//  console.log(manager.deleteProducts(2))
 
 // console.log(manager.getProductById(2))
 // console.log(manager.updateProducts(upd))
