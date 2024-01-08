@@ -1,1 +1,0 @@
-[{"nombre":"sebastian","apellido":"monzon","edad":"42","curso":"backend"},{"nombre":"sebastian","apellido":"monzon","edad":"42","curso":"backend"},{"nombre":"Juaanito","apellido":"monzon","edad":"42","curso":"backend"}]

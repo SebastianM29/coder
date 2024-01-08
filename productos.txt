@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "title": "terrabusi",
+    "description": "masitas",
+    "price": 299,
+    "thumbnail": "/masitas",
+    "code": 151262592,
+    "stock": 2
+  }
+]
