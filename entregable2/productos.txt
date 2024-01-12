@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "title": "Don Satur",
+    "description": "Pan dulce",
+    "price": 299,
+    "thumbnail": "/panificado",
+    "code": 12453,
+    "stock": 2
+  },
+  {
+    "id": 2,
+    "title": "terrabusi",
+    "description": "masitas",
+    "price": 299,
+    "thumbnail": "/masitas",
+    "code": 151262592,
+    "stock": 2
+  },
+  {
+    "id": 3,
+    "title": "Pitusas",
+    "description": "galletitas",
+    "price": 2999,
+    "thumbnail": "/masas",
+    "code": 163332,
+    "stock": 243232
+  },
+  {
+    "id": 4,
+    "title": "suipachense",
+    "description": "yogurt",
+    "price": 299,
+    "thumbnail": "/lacteo",
+    "code": 9853,
+    "stock": 2
+  },
+  {
+    "id": 5,
+    "title": "stanley",
+    "description": "termo",
+    "price": 299,
+    "thumbnail": "/bazar",
+    "code": 345,
+    "stock": 2
+  },
+  {
+    "id": 6,
+    "title": "lavandina",
+    "description": "querubin",
+    "price": 2999,
+    "thumbnail": "/limpieza",
+    "code": 92,
+    "stock": 243232
+  }
+]
