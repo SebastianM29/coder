@@ -1,38 +1,29 @@
 [
-   {
-      "id": 1,
-      "title": "lacoste",
-      "description": "remera",
-      "price": 2999,
-      "thumbnail": "/vestimenta",
-      "code": 92234,
-      "stock": 248882
-   },
-   {
-      "id": 2,
-      "title": "lavandina",
-      "description": "querubin",
-      "price": 2999,
-      "thumbnail": "/limpieza",
-      "code": 92,
-      "stock": 243232
-   },
-   {
-      "id": 3,
-      "title": "lavandina",
-      "description": "ayudin",
-      "price": 2999,
-      "thumbnail": "/limpieza",
-      "code": 9452,
-      "stock": 243232
-   },
-   {
-      "id": 4,
-      "title": "detergente",
-      "description": "colores blancos",
-      "price": 45000,
-      "thumbnail": "/limpieza",
-      "code": 9002,
-      "stock": 243232
-   }
+  {
+    "id": 3,
+    "title": "lavandina",
+    "description": "ayudin",
+    "price": 2999,
+    "thumbnail": "/limpieza",
+    "code": 9452,
+    "stock": 243232
+  },
+  {
+    "id": 4,
+    "title": "detergente",
+    "description": "colores blancos",
+    "price": 45000,
+    "thumbnail": "/limpieza",
+    "code": 9002,
+    "stock": 243232
+  },
+  {
+    "id": 5,
+    "title": "stanley",
+    "description": "vaso",
+    "price": 4000,
+    "thumbnail": "/bazar",
+    "code": 3454,
+    "stock": 4
+  }
 ]

@@ -91,32 +91,42 @@ export class ProductManager {
         }
             
         }
+           /**corregido */
         async deleteProducts(id){
-        const data = fs.promises.readFile(`${this.path}.txt`,'utf-8')
-        let dataParse = JSON.parse(data)
-        console.log('esto se deberiaver',dataParse)
-        
-        for (const iterator of dataParse) {
-                console.log('este es el iterator', iterator.id)
-            if (iterator.id === id) {
+            try {
                 
-                const find = dataParse.find((value)  => value.id === id)
-                const deleteSuccess = dataParse.filter(value => value.id !== id)
-                console.log('el que deberia eliminar',find)
-                dataParse = deleteSuccess
-                const productsArrayStrings = JSON.stringify(dataParse,null,2)
-                await fs.promises.writeFile(`${this.path}.txt`,productsArrayStrings)
-    
-                return {msg:'producto borrado',
-                        producto: find
+                console.log(id)
+                const data = await fs.promises.readFile(`${this.path}.txt`,'utf-8')
+                let dataParse = JSON.parse(data)
+                console.log('esto se deberiaver',dataParse)
+                
+                for (const iterator of dataParse) {
+                   
+                    if (iterator.id === id) {
+                        
+                        
+                        const find = dataParse.find((value)  => value.id === id)
+                        const deleteSuccess = dataParse.filter(value => value.id !== id)
+                        console.log('el que deberia eliminar',find)
+                        dataParse = deleteSuccess
+                        const productsArrayStrings = JSON.stringify(dataParse,null,2)
+                        await fs.promises.writeFile(`${this.path}.txt`,productsArrayStrings)
+            
+                        return {msg:'producto borrado',
+                                producto: find
+                            }
+                        
                     }
+                    
+                    
+                    
+                }
+                
+                return `El id no es valido:${id}`
+
+            } catch (error) {
                 
             }
-            
-            
-            
-        }
-        return `El id no es valido:${id}`
         
         }
 
@@ -176,11 +186,11 @@ export class ProductManager {
 
 const objeto2 = {
             title:'stanley',
-            description:'termo',
-            price:299,
+            description:'vaso',
+            price:4000,
             thumbnail:'/bazar',
-            code: 345,
-            stock:2
+            code: 3454,
+            stock:4
     
          }
 const objeto1 = {
@@ -214,9 +224,9 @@ const objeto3 = {
 
 
 const upd = {
-    id:4,
-    fieldUpdate:'description',
-    newValue:'colores blancos'
+    id:2,
+    fieldUpdate:'code',
+    newValue:105
 }
 
 const manager = new ProductManager('./productos')
@@ -231,15 +241,15 @@ const manager = new ProductManager('./productos')
 // console.log(manager.getProductById(2))
 // console.log(manager.updateProducts(upd))
 
-// const llamandoF = async() => {
-//     try {
-//        const newObject = await manager.updateProducts(upd)
-//        console.log(newObject)
-//        return newObject
-//     } catch (error) {
-//         throw error
-//     }
-// }
+const llamandoF = async() => {
+    try {
+       const newObject = await manager.deleteProducts(1)
+       console.log(newObject)
+       return newObject
+    } catch (error) {
+        throw error
+    }
+}
 
-// llamandoF()
+llamandoF()
 
