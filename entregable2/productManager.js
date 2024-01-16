@@ -10,39 +10,47 @@ export class ProductManager {
         this.path=path
       
     }
-    getProducts(){
-        const existFiles = fs.existsSync(`${this.path}.txt`)
-        if (existFiles) {
-            const data =  fs.readFileSync(`${this.path}.txt`,'utf-8')
+     /**corregido */
+    async getProducts(){
+        try {
+            await fs.promises.access(`${this.path}.txt`, fs.constants.F_OK)
+            const data =  JSON.parse(fs.readFileSync(`${this.path}.txt`,'utf-8'))
             return data
-        }else {
+            
+        } catch (error) {
+            
             return 'Sin Datos en el archivo'
         }
+        
+        
     }
-    addProduct(obj){
-       
+    /**corregido */
+    async addProduct(obj){
+        try {
+            
             let newValue = 0
-            const existFiles = fs.existsSync(`${this.path}.txt`)
-             let dataParse
+            let dataParse
 
-            if (existFiles) {
+                try {
+                await fs.promises.access(`${this.path}.txt`)
                 console.log('hay dato')
-                const data =  fs.readFileSync(`${this.path}.txt`,'utf-8')
-    
+                const data = await fs.promises.readFile(`${this.path}.txt`,'utf-8')
                 dataParse = JSON.parse(data)
+                console.log(data)
+                    
+                } catch (error) {
+                    dataParse= []
+                    console.log(' no hay dato')      
+                }
                 
-            }else{
-               
-                dataParse= []
-               
-            }
+        
             for (const values of dataParse) {
-                
-                if (values.id > newValue) {
+                      if (values.id > newValue) {
                       newValue = values.id
                 }
                 
             }
+
             let newProduct={
             
                 id: newValue += 1,
@@ -70,17 +78,21 @@ export class ProductManager {
             if (algo.length > 0) {
                 return (`estos campos deben venir : ${algo}`)
             }else{
-                
                 dataParse.push(newProduct)
-                
                 const productsArrayStrings = JSON.stringify(dataParse,null,2)
-                fs.writeFileSync(`${this.path}.txt`,productsArrayStrings)
-                return 'agregado exitosamente'
+                await  fs.promises.writeFile(`${this.path}.txt`,productsArrayStrings)
+                return {
+                    msg:'Agregado exitosamente',
+                    obj: newProduct  
+                }
             }
-         
+        } catch (error) {
+                throw error
         }
-        deleteProducts(id){
-        const data = fs.readFileSync(`${this.path}.txt`,'utf-8')
+            
+        }
+        async deleteProducts(id){
+        const data = fs.promises.readFile(`${this.path}.txt`,'utf-8')
         let dataParse = JSON.parse(data)
         console.log('esto se deberiaver',dataParse)
         
@@ -93,7 +105,7 @@ export class ProductManager {
                 console.log('el que deberia eliminar',find)
                 dataParse = deleteSuccess
                 const productsArrayStrings = JSON.stringify(dataParse,null,2)
-                fs.writeFileSync(`${this.path}.txt`,productsArrayStrings)
+                await fs.promises.writeFile(`${this.path}.txt`,productsArrayStrings)
     
                 return {msg:'producto borrado',
                         producto: find
@@ -109,29 +121,34 @@ export class ProductManager {
         }
 
 
+      /**corregido */
 
+       async getProductById(id) {
+        try {
+            
+            const data =await fs.promises.readFile(`${this.path}.txt`,'utf-8')
+            const dataParse = JSON.parse(data)
+            const findId = dataParse.find((element) => element.id === id)
+          
+            return  findId ? findId 
+             : `id numero:${id}, no existente`
+        } catch (error) {
+            throw error
+        }
+    }
 
-       getProductById(id) {
-       const data = fs.readFileSync(`${this.path}.txt`,'utf-8')
-       const dataParse = JSON.parse(data)
-       const findId = dataParse.find((element) => element.id === id)
-     
-       return  findId ?{
-        msg:'producto encontrado',
-        id:id,
-        producto:findId} 
-        : `id numero:${id}, no existente`
-      }
+    /**corregido */
 
-
-      updateProducts(update){
-        const data = fs.readFileSync(`${this.path}.txt`,'utf-8')
+      async updateProducts(update){
+        let oldValue
+        const data =await fs.promises.readFile(`${this.path}.txt`,'utf-8')
         const dataParse = JSON.parse(data)
         
         const findUpdate = dataParse.find((element) => element.id === update.id)
         if (!findUpdate) {
             return 'no se encontro ningun id'
         }
+        oldValue={...findUpdate}
 
         const findUp = Object.keys(findUpdate).filter((key)=> key === update.fieldUpdate)
         if (findUp.length === 0) {
@@ -147,9 +164,12 @@ export class ProductManager {
             return element
         })
         const  newUpdateString = JSON.stringify(newUpdate,null,3)
-        fs.writeFileSync(`${this.path}.txt`,newUpdateString)
+        await fs.promises.writeFile(`${this.path}.txt`,newUpdateString)
         
-        return 'actualizado correctamente'
+        return {
+            producto:oldValue,
+            productoActualizado:findUpdate
+        }
     }
 }
 
@@ -173,19 +193,30 @@ const objeto1 = {
     
          }
 const objeto3 = {
-            title:'lavandina',
-            description:'querubin',
+            title:'detergente',
+            description:'ala',
             price:2999,
             thumbnail:'/limpieza',
-            code: 92,
+            code: 9002,
             stock:243232
     
         }
 
+        const prodNuevo = {
+            title:'lacoste',
+            description:'remera',
+            price:2999,
+            thumbnail:'/vestimenta',
+            code: 92234,
+            stock:248882
+    
+        }
+
+
 const upd = {
-    id:1,
-    fieldUpdate:'stock',
-    newValue:30000
+    id:4,
+    fieldUpdate:'description',
+    newValue:'colores blancos'
 }
 
 const manager = new ProductManager('./productos')
@@ -199,3 +230,16 @@ const manager = new ProductManager('./productos')
 
 // console.log(manager.getProductById(2))
 // console.log(manager.updateProducts(upd))
+
+// const llamandoF = async() => {
+//     try {
+//        const newObject = await manager.updateProducts(upd)
+//        console.log(newObject)
+//        return newObject
+//     } catch (error) {
+//         throw error
+//     }
+// }
+
+// llamandoF()
+

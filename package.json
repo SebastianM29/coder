@@ -9,7 +9,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "Proyecto de entrega para el curso de Coderhouse",
   "dependencies": {
     "express": "^4.18.2"
   }
