@@ -3,40 +3,59 @@ import { ProductManager } from '../entregable2/productManager.js'
 const app = express()
 
 const prod = new ProductManager('../entregable2/productos')
-const respProducts = prod.getProducts()
-const respProductsParse = JSON.parse(respProducts)
+
+
 
 
 
 app.use(express.urlencoded({extended:true}))
 
 
-app.get('/products', function (req, res) {
+app.get('/products', async (req, res) => {
+    try {
+        
+        const respProducts = await prod.getProducts()
+        console.log(respProducts)
+       
+        const {limit} = req.query
+        if (!limit ){ 
+            return res.json(respProducts)
+        }
+        
+        const limitResp = respProducts.slice(0,limit)
     
-    const {limit} = req.query
-    if (!limit ){ 
-        return res.json(respProductsParse)
+        return res.json({
+            limite:limit,
+            datos:limitResp
+            })
+        
+    } catch (error) {
+        console.log('error')
+        throw error
     }
     
-    const limitResp = respProductsParse.slice(0,limit)
-    return res.json(limitResp)
-    
-    
     
 })
 
-app.get('/products/:pid', function (req, res) {
-   
-    const id = parseInt(req.params.pid)
-    const findId = respProductsParse.find(element => element.id === id)
-   if (findId) {
+app.get('/products/:pid', async (req, res) => {
+    try {
+        
+        const respProducts = await prod.getProducts()
+        
+           const id = parseInt(req.params.pid)
+          const findId = respProducts.find(element => element.id === id)
+         if (findId) {
+           
+              console.log('este es el id',findId)
+              return res.json(findId)
+           }
+           return res.send('no existe id')
+    } catch (error) {
+        throw error
+    }
     
-       console.log('este es el id',findId)
-      return res.json(findId)
-   }
-   return res.send('no existe id')
 })
 
-app.listen(4000,()=> {
-    console.log('escuchando en el puerto 4000 ')
+app.listen(5000,()=> {
+    console.log('escuchando en el puerto 5000 ')
 })
