@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "title": "stanley",
+    "description": "soldadora",
+    "code": 445,
+    "price": 6000,
+    "status": true,
+    "stock": 53,
+    "category": "ferreteria",
+    "thumbnail": [
+      [
+        "/ubicacion/misteriosa2.image.jpg"
+      ]
+    ]
+  },
+  {
+    "id": 2,
+    "title": "stanley",
+    "description": "amoladora",
+    "code": 345,
+    "price": 3200,
+    "status": true,
+    "stock": 4,
+    "category": "ferreteria",
+    "thumbnail": [
+      [
+        "/ubicacion/misteriosa1.image.jpg"
+      ]
+    ]
+  },
+  {
+    "id": 3,
+    "title": "stanley",
+    "description": "caladora",
+    "code": 20,
+    "price": 4000,
+    "status": true,
+    "stock": 2,
+    "category": "ferreteria",
+    "thumbnail": [
+      [
+        "/ubicacion/misteriosa3.image.jpg"
+      ]
+    ]
+  }
+]

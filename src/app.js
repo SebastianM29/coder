@@ -37,7 +37,7 @@ app.get('/products', async (req, res) => {
     
 })
 
-app.get('/products/:pid', async (req, res) => {
+app.get('/products/:id', async (req, res) => {
     try {
         
         const respProducts = await prod.getProducts()
