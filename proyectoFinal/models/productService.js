@@ -159,6 +159,9 @@ export class ProductService {
             if (update.id) {
                 return {msg:'No se puede cargar un nuevo ID'}
             }
+            if (update.code) {
+                return {msg:'El codigo no puede ser alterado'}
+            }
             dataParse.map((element)=>{
                 if (element.id === id) {
                     for (const key in update) {

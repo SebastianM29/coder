@@ -1,41 +1,41 @@
 [
-  {
-    "id": 3,
-    "title": "stanley",
-    "description": "sierra de banco",
-    "code": 440,
-    "price": 40000,
-    "status": true,
-    "stock": 50,
-    "category": "ferreteria",
-    "thumbnail": [
-      "/ubicacion/misteriosa4.image.jpg"
-    ]
-  },
-  {
-    "id": 4,
-    "title": "DeWalt",
-    "description": "caladora",
-    "code": 230,
-    "price": 140000,
-    "status": true,
-    "stock": 49,
-    "category": "ferreteria",
-    "thumbnail": [
-      "/ubicacion/misteriosa5.image.jpg"
-    ]
-  },
-  {
-    "id": 5,
-    "title": "stanley",
-    "description": "caladora",
-    "code": 842,
-    "price": 35000,
-    "status": true,
-    "stock": 22,
-    "category": "ferreteria",
-    "thumbnail": [
-      "/ubicacion/misteriosa6.image.jpg"
-    ]
-  }
+   {
+      "id": 3,
+      "title": "stanley",
+      "description": "sierra de banco",
+      "code": 440,
+      "price": 40000,
+      "status": true,
+      "stock": 50,
+      "category": "ferreteria",
+      "thumbnail": [
+         "/ubicacion/misteriosa4.image.jpg"
+      ]
+   },
+   {
+      "id": 4,
+      "title": "makita",
+      "description": "caladora",
+      "code": 230,
+      "price": 140000,
+      "status": true,
+      "stock": 49,
+      "category": "ferreteria",
+      "thumbnail": [
+         "/ubicacion/misteriosa5.image.jpg"
+      ]
+   },
+   {
+      "id": 5,
+      "title": "stanley",
+      "description": "caladora",
+      "code": 842,
+      "price": 35000,
+      "status": true,
+      "stock": 22,
+      "category": "ferreteria",
+      "thumbnail": [
+         "/ubicacion/misteriosa6.image.jpg"
+      ]
+   }
 ]
