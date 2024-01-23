@@ -84,52 +84,71 @@ export class CartService {
         try {
             
              let productIdAndQuantity = {
-             quantity: 0,
-             id:''
+                 id:'',
+                 quantity: 0
             }
             console.log('recibiendo producto',productId,'recibiendo id',cartId)
             const carts = await fs.promises.readFile(`${this.path}.json`,'utf-8')
             const cartsParse = JSON.parse(carts)
-            console.log(cartsParse)
-            if (carts) {
-              const findCarts = cartsParse.find(element => element.id === cartId)
-              console.log(findCarts)
-              if (findCarts) {
-                  console.log('este es el carrtito', findCarts)
-      
+            const findCarts = cartsParse.findIndex(element => element.id === cartId)
+            
+
+
+            if (findCarts !== -1) {
+                  console.log('algo')
+                  
+                  
                   const products = await fs.promises.readFile(`./productos.json`,'utf-8')
                   const productsParse= JSON.parse(products)
                   const findProductsById = productsParse.find(element => element.id === productId)
+                  const cartIndexFind = cartsParse[findCarts].products.findIndex(products => products.id === productId)
+                  console.log('este id?',cartIndexFind)
+              
                   if (findProductsById) {
+                      
+                      if (cartIndexFind !== -1) {
+                        console.log('entrando si son id iguales del carts')
+                        console.log(cartsParse[findCarts].products[cartIndexFind].quantity)
+
+                        cartsParse[findCarts].products[cartIndexFind].quantity++
+              
+
+                        
+                      }else{
                       productIdAndQuantity.id = productId;
-                      productIdAndQuantity.quantity += 1
-                      findCarts.products.push(productIdAndQuantity)
-                      console.log('hay algo?',findCarts)
+                      productIdAndQuantity.quantity = 1
+                      cartsParse[findCarts].products.push(productIdAndQuantity)
+                      }
+                    
+                      const cartsParseStringify = JSON.stringify(cartsParse,null,3)
+                      await fs.promises.writeFile(`${this.path}.json`,cartsParseStringify)
+
+
+                     
+
+
                       return {
                         msg: 'producto id agregado',
-                        cart : findCarts
+                        cart : cartsParse
                       }
-                  }else{
+                    }else{
                      
-                    return 'producto no encontrado'
+                      return 'producto no encontrado por id'
 
-                  }
+                    } 
 
 
               }else{
       
-      
-                  return 'no se encuentra ninguno con este id'
+                  console.log('no hay nada')
+                  return 'no se encuentra ninguno carts'
       
               } 
       
       
       
       
-            }else{
-              console.log( `no existe ningun carrito`)
-              return `no existe ningun carrito`
-            }
+          
         } catch (error) {
             
         }

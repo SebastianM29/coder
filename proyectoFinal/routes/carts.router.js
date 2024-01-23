@@ -48,7 +48,8 @@ router.post('/api/carts/:cid/products/:pid',async(req,res)=>{
         res.json(resp)
         
     } catch (error) {
-
+    
+        throw error
     
     }
 })
