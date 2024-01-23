@@ -7,7 +7,7 @@ export class ProductService {
         this.path=path
       
     }
-     /**corregido */
+     
     async getProducts(limit){
         try {
             await fs.promises.access(`${this.path}.json`, fs.constants.F_OK)
@@ -23,7 +23,7 @@ export class ProductService {
             return 'Sin Datos en el archivo'
         }
     }
-    /**corregido */
+ 
     async addProduct(obj){
         try {
             
@@ -90,21 +90,21 @@ export class ProductService {
                 throw error
             }
         }
-           /**corregido */
+          
         async deleteProducts(id){
             try {
                 
-                console.log(id)
+               
                 const data = await fs.promises.readFile(`${this.path}.json`,'utf-8')
                 let dataParse = JSON.parse(data)
-                console.log('esto se deberiaver',dataParse)
+               
 
                 for (const iterator of dataParse) {
                     if (iterator.id === id) {
                         
                         const find = dataParse.find((value)  => value.id === id)
                         const deleteSuccess = dataParse.filter(value => value.id !== id)
-                        console.log('el que deberia eliminar',find)
+                       
                         dataParse = deleteSuccess
                         const productsArrayStrings = JSON.stringify(dataParse,null,2)
                         await fs.promises.writeFile(`${this.path}.json`,productsArrayStrings)
@@ -136,128 +136,71 @@ export class ProductService {
         }
     }
 
-    /**corregido */
+    
 
       async updateProducts(id,update){
-        let oldValue
-        let fields =[]
-        const data =await fs.promises.readFile(`${this.path}.json`,'utf-8')
-        const dataParse = JSON.parse(data)
+        try {
+            
+            let oldValue
+            let fields =[]
+            const data =await fs.promises.readFile(`${this.path}.json`,'utf-8')
+            const dataParse = JSON.parse(data)
+            
+            const findUpdate = dataParse.find((element) => element.id === id)
+          
         
-        const findUpdate = dataParse.find((element) => element.id === id)
-      
-    
-        if (!findUpdate) {
-            return 'no se encontro ningun id'
-        }
-        console.log('id encontrado',findUpdate)
-        oldValue={...findUpdate}
-        
-        console.log(findUpdate)
-        if (update.id) {
-            return {msg:'No se puede cargar un nuevo ID'}
-        }
-        dataParse.map((element)=>{
-            if (element.id === id) {
-                for (const key in update) {
-                   if (!findUpdate[key]) {
-                        console.log('verificANDO')
-                        fields.push(key)
-                        console.log('verificANDO',fields)
-                    }
-                    console.log('entro al forin',key)
-                    element[key] = update[key]
-                  
-                }
+            if (!findUpdate) {
+                return 'no se encontro ningun id'
             }
-        })
-
-        if (fields.length > 0) {
+           
+            oldValue={...findUpdate}
+            
+           
+            if (update.id) {
+                return {msg:'No se puede cargar un nuevo ID'}
+            }
+            dataParse.map((element)=>{
+                if (element.id === id) {
+                    for (const key in update) {
+                       if (!findUpdate[key]) {
+                            console.log('verificANDO')
+                            fields.push(key)
+                            console.log('verificANDO',fields)
+                        }
+                       
+                        element[key] = update[key]
+                      
+                    }
+                }
+            })
+    
+            if (fields.length > 0) {
+                return {
+                    msg:`campos no validos`,
+                    campos:fields
+            }
+            }
+    
+           
+            
+            const  newUpdateString = JSON.stringify(dataParse,null,3)
+            await fs.promises.writeFile(`${this.path}.json`,newUpdateString)
+            
             return {
-                msg:`campos no validos`,
-                campos:fields
-        }
-        }
+                producto:oldValue,
+                productoActualizado:findUpdate
+            }
 
-        console.log('esto se ve???',dataParse)
-        
-        const  newUpdateString = JSON.stringify(dataParse,null,3)
-        await fs.promises.writeFile(`${this.path}.json`,newUpdateString)
-        
-        return {
-            producto:oldValue,
-            productoActualizado:findUpdate
+
+
+
+
+
+        } catch (error) {
+            // console.error('Error', error.message)
+            throw new Error ('Problema a la hora de actualiar producto')
         }
     }
 }
 
-
-const objeto2 = {
-            title:'stanley',
-            description:'vaso',
-            price:4000,
-            thumbnail:'/bazar',
-            code: 3454,
-            stock:4
-    
-         }
-const objeto1 = {
-            title:'suipachense',
-            description:'yogurt',
-            price:299,
-            thumbnail:'/lacteo',
-            code:9853,
-            stock:2
-    
-         }
-const objeto3 = {
-            title:'detergente',
-            description:'ala',
-            price:2999,
-            thumbnail:'/limpieza',
-            code: 9002,
-            stock:243232
-    
-        }
-
-        const prodNuevo = {
-            title:'lacoste',
-            description:'remera',
-            price:2999,
-            thumbnail:'/vestimenta',
-            code: 92234,
-            stock:248882
-    
-        }
-
-
-const upd = {
-    id:2,
-    fieldUpdate:'code',
-    newValue:105
-}
-
-// const manager = new ProductManager('./productos')
-//  console.log(manager.addProduct(objeto1))
-// console.log(manager.addProduct(objeto2))
-// console.log(manager.addProduct(objeto3))
-// console.log(manager.getProducts()) 
-
-
-//  console.log(manager.deleteProducts(2))
-
-// console.log(manager.getProductById(2))
-// console.log(manager.updateProducts(upd))
-
-// const llamandoF = async() => {
-//     try {
-//        const newObject = await manager.deleteProducts(1)
-//        console.log(newObject)
-//        return newObject
-//     } catch (error) {
-//         throw error
-//     }
-// }
-
-// llamandoF()
 

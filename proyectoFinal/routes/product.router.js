@@ -6,17 +6,12 @@ const productHandler = new ProductService('./productos')
 
 router.get('/api/products',async(req,res)=>{
     try {
-        
-      
-        
         const {limit} = req.query
         const respProducts = await productHandler.getProducts(limit)
         
         console.log(respProducts)
     
-        return res.json({
-          respProducts
-            })
+        return res.json(respProducts)
         
     } catch (error) {
         console.log('error')
@@ -43,10 +38,10 @@ router.get('/api/products/:id',async(req,res)=>{
 
 router.post('/api/products',async(req,res)=>{
     try {
-        const products = req.body
+       const products = req.body
        const resp = await productHandler.addProduct(products)
        console.log(resp)
-       res.json(resp)
+       return res.json(resp)
         
     } catch (error) {
         throw new Error
@@ -59,7 +54,7 @@ router.put('/api/products/:id',async(req,res)=>{
       const parseId = parseInt(req.params.id) 
       const infoPut = req.body
       const resp = await productHandler.updateProducts(parseId,infoPut)
-      res.json(resp)  
+      return res.json(resp)  
     } catch (error) {
         throw new Error
     }
@@ -70,9 +65,9 @@ router.put('/api/products/:id',async(req,res)=>{
 router.delete('/api/products/:id',async(req,res)=>{
     try {
       const parseId = parseInt(req.params.id) 
-      const infoPut = req.body
+      
       const resp = await productHandler.deleteProducts(parseId)
-      res.json(resp)  
+      return res.json(resp)  
     } catch (error) {
         throw new Error
     }

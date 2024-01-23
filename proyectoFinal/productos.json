@@ -1,31 +1,5 @@
 [
   {
-    "id": 1,
-    "title": "stanley",
-    "description": "soldadora",
-    "code": 445,
-    "price": 6000,
-    "status": true,
-    "stock": 53,
-    "category": "ferreteria",
-    "thumbnail": [
-      "/ubicacion/misteriosa2.image.jpg"
-    ]
-  },
-  {
-    "id": 2,
-    "title": "stanley",
-    "description": "taladro",
-    "code": 442,
-    "price": 10000,
-    "status": true,
-    "stock": 52,
-    "category": "ferreteria",
-    "thumbnail": [
-      "/ubicacion/misteriosa1.image.jpg"
-    ]
-  },
-  {
     "id": 3,
     "title": "stanley",
     "description": "sierra de banco",
@@ -40,15 +14,28 @@
   },
   {
     "id": 4,
-    "title": "stanley",
-    "description": "destornilladores",
-    "code": 240,
+    "title": "DeWalt",
+    "description": "caladora",
+    "code": 230,
     "price": 140000,
     "status": true,
     "stock": 49,
     "category": "ferreteria",
     "thumbnail": [
       "/ubicacion/misteriosa5.image.jpg"
+    ]
+  },
+  {
+    "id": 5,
+    "title": "stanley",
+    "description": "caladora",
+    "code": 842,
+    "price": 35000,
+    "status": true,
+    "stock": 22,
+    "category": "ferreteria",
+    "thumbnail": [
+      "/ubicacion/misteriosa6.image.jpg"
     ]
   }
 ]
