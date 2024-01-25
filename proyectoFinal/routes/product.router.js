@@ -11,7 +11,7 @@ router.get('/api/products',async(req,res)=>{
         
         console.log(respProducts)
     
-        return res.json(respProducts)
+        res.json(respProducts)
         
     } catch (error) {
         console.log('error')
@@ -25,7 +25,7 @@ router.get('/api/products/:id',async(req,res)=>{
     
         const parseIntId = parseInt(req.params.id)
         const resp = await productHandler.getProductById(parseIntId)
-        return res.json(resp)
+        res.json(resp)
         
 
         
@@ -41,7 +41,7 @@ router.post('/api/products',async(req,res)=>{
        const products = req.body
        const resp = await productHandler.addProduct(products)
        console.log(resp)
-       return res.json(resp)
+       res.json(resp)
         
     } catch (error) {
         throw new Error
@@ -54,7 +54,7 @@ router.put('/api/products/:id',async(req,res)=>{
       const parseId = parseInt(req.params.id) 
       const infoPut = req.body
       const resp = await productHandler.updateProducts(parseId,infoPut)
-      return res.json(resp)  
+      res.json(resp)  
     } catch (error) {
         throw new Error
     }
@@ -67,7 +67,7 @@ router.delete('/api/products/:id',async(req,res)=>{
       const parseId = parseInt(req.params.id) 
       
       const resp = await productHandler.deleteProducts(parseId)
-      return res.json(resp)  
+      res.json(resp)  
     } catch (error) {
         throw new Error
     }
