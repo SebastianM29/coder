@@ -12,14 +12,29 @@ export class Product {
      
     }
     async addProduct(prod){
+        let datos =[]
         
+           try {
+                 await fs.promises.access(`${this.path}.json`)
+                 const resp = await fs.promises.readFile(`${this.path}.json`,'utf-8')
+                 datos = JSON.parse(resp)
+                  
+                 console.log('deberia ver datos guardado',datos)
+
+          } catch (error) {
+                 datos = []
+            
+          }
         console.log('estos son los datos',prod)
           try {
               this.product.name = prod
               this.product.id=uuid()
-              const datos= this.product
+              datos.push(this.product)
               console.log('estos son los datos',datos)
-    
+              console.log('quiero ver el array',datos)
+              const saveProdArrayString = JSON.stringify(datos,null,3)
+              await fs.promises.writeFile(`${this.path}.json`,saveProdArrayString)
+              
               return datos
             } catch (error) {
             
