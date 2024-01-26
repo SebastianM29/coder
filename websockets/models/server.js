@@ -5,6 +5,7 @@ import { fileURLToPath } from "url";
 import handlebars from "express-handlebars";
 import * as http from "http"
 import { Server as SocketIOServer } from "socket.io";
+import { socketsController } from "../sockets/socketsControlllers.js";
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -46,17 +47,7 @@ const __dirname = dirname(__filename)
     }  
     //referencia a nuestro servidor de sockets
     sockets(){
-        this.io.on('connection', socket => {
-            console.log('Cliente conectado',socket.id)
-            socket.on('disconnect', ()=> {
-                console.log('Cliente desconectado', socket.id)
-            })
-
-            socket.on('send-product',(payload)=>{
-                console.log(' llego conexion al server',payload)
-                this.io.emit('enviando-mensaje','desde el server')
-            })
-        })
+        this.io.on('connection', socketsController )
       
     }
     

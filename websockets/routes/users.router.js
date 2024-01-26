@@ -13,7 +13,7 @@ router.get('/',(req,res)=>{
 
 router.get('/realtimeproducts',(req,res)=>{
 
-    let nombre= 'Productos'
+    let nombre= 'Productos a agregar'
   
     res.render('realTimeProducts',{nombre})
 })
