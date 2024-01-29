@@ -13,8 +13,19 @@
    <div class="container h-100">
     <div class="row h-100">
         <div class="col-md-4 my-auto">
-         <form id="products"  action="/realtimeproducts">
-         <input id="producto" type="text" class="form-control mt-5 rounded-0" placeholder="producto">
+         <form  id="products"  action="/realtimeproducts">
+         <label for="title">Titulo</label>
+         <input id="title" type="text" class="form-control mt-2 mb-3 rounded-0" placeholder="title">
+         <label for="description">Descripcion</label>
+         <input id="description" type="text" class="form-control mt-2 mb-3 rounded-0" placeholder="descripcion">
+         <label for="code">Codigo</label>
+         <input id="code" type="text" class="form-control mt-2 mb-3 rounded-0" placeholder="code">
+         <label for="price">Precio</label>
+         <input id="price" type="text" class="form-control mt-2 mb-3 rounded-0" placeholder="price">
+         <label for="stock">Stock</label>
+         <input id="stock" type="text" class="form-control mt-2 mb-3 rounded-0" placeholder="stock">
+         <label for="category">Categoria</label>
+         <input id="category" type="text" class="form-control mt-2 mb-3 rounded-0" placeholder="categoria">
          <button class="mt-4 btn btn-danger rounded-0">Agregar producto</button>
          </form>
          </div>
@@ -22,7 +33,7 @@
             
          <div class="bloqueProductos ">
             <h2>Productos</h2>
-            <div id="productoIngresado"></div>
+            <div  id="productoIngresado"></div>
         </div>
 
          </div>

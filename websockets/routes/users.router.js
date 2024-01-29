@@ -1,13 +1,17 @@
 import { Router } from "express";
+import { ProductService } from "../models/productService.js";
 const router = Router()
 
+const producto =  new ProductService('./db')
 
 
-router.get('/',(req,res)=>{
 
-    let nombre= 'sebastian llegando'
+router.get('/',async(req,res)=>{
+
+    const resp = await producto.getProducts()
+    console.log('base',resp)
   
-    res.render('home',{nombre})
+    res.render('home',{resp})
 })
 
 

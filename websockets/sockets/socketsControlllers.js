@@ -1,6 +1,7 @@
-import { Product } from "../models/products.js"
+import { ProductService } from "../models/productService.js"
 
-const producto =  new Product('./db')
+
+const producto =  new ProductService('./db')
 
 
 export const socketsController = (socket) => {
@@ -16,8 +17,8 @@ export const socketsController = (socket) => {
         socket.emit('enviando-mensaje',product)
     })
 
-    // socket.on('enviodatos:cliente',async(data) => {
-    //     console.log('server',data)
-    //     const prodEliminado = await producto.deleteProduct(data)
-    // })
+    socket.on('enviodatos:cliente',async(data) => {
+        console.log('server',data)
+        await producto.deleteProducts(data)
+    })
 }

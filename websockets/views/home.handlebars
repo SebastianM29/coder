@@ -8,8 +8,26 @@
 </head>
 
 <body>
-   <h1>Lista de productos</h1>
-   <h2>{{nombre}}</h2> 
+    
+   <h1 class="ml-3">Lista de productos</h1>
+    {{#each resp}}
+    <div class="rec">
+
+
+    <div class="recuadro">
+      <div class="mt-4 bgHome">
+       <strong>Producto</strong>
+       <div>Titulo: {{this.title}}</div>
+       <div>Descripcion: {{this.description}}</div>
+       <div>Codigo: {{this.code}}</div>
+       <div>Precio: {{this.price}}</div>
+       <div>Stock: {{this.stock}}</div>
+       <div>Categoria: {{this.category}}</div>
+      </div>
+    </div>
+
+    </div>
+    {{/each}}
 </body>
 
 </html>
