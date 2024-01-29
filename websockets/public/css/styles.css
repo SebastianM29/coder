@@ -47,6 +47,7 @@ h2{
 }
 .recuadro{
     display: flex;
+    margin-left: 40px;
    
   
 }
